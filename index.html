@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+</head>
+
+<body>
+  <div x-data="contacts()" x-init="getContacts()">
+    <h1>It works!</h1>
+
+    <form x-ref="form" @submit.prevent="addContact()">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="text" name="mobile" placeholder="Mobile" required>
+      <button type="submit">Add contact</button>
+    </form>
+
+    <ul>
+      <template x-for="contact in contacts" :key="contact.id">
+        <li>
+          <span x-text="contact.name"></span>
+          <span> - </span>
+          <span x-text="contact.mobile"></span>
+        </li>
+      </template>
+    </ul>
+  </div>
+
+  <script>
+    function contacts() {
+      return {
+        contacts: [],
+        getContacts() {
+          fetch('/api/contacts')
+            .then(res => res.json())
+            .then(data => this.contacts = data)
+            .catch(err => console.error(err));
+        },
+        addContact(event) {
+          let formData = new FormData(this.$refs.form);
+
+          fetch('/api/add-contact', {
+            method: 'POST',
+            body: formData
+          })
+            .then(res => res.json())
+            .then(data => {
+              this.$refs.form.reset();
+              this.getContacts();
+            })
+            .catch(err => {
+              alert('Something went wrong!');
+              console.error(err);
+            })
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
