@@ -1,14 +1,10 @@
-var mysql = require('mysql');
+var mongoose = require('mongoose');
 
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'contacts',
-});
-
-con.connect(function (err) {
-  if (err) throw err;
-});
+const con = () => {
+  return mongoose.connect('mongodb://localhost:27017/contacts', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+};
 
 module.exports = con;
