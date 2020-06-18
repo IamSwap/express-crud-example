@@ -1,39 +1,23 @@
-var con = require('./connection');
+var Person = require('./models/Person');
 
 module.exports = (app) => {
   // Return home page
   app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    return res.sendFile(__dirname + '/index.html');
   });
 
   // Get all contacts
-  app.get('/api/contacts', (req, res) => {
-    var sql = 'SELECT * FROM contacts';
-
-    con.query(sql, (err, result) => {
-      if (err) throw err;
-
-      res.json(result);
-    });
+  app.get('/api/contacts', async (req, res) => {
+    return res.json(await Person.find());
   });
 
   // Add a contact
-  app.post('/api/add-contact', (req, res) => {
+  app.post('/api/add-contact', async (req, res) => {
     if (!req.body.name || !req.body.mobile) {
-      res.json({
-        message: 'Please provide required fields data.',
-      });
-      return;
+      return res.json({ message: 'Please provide required fields data.' });
     }
 
-    var sql = `INSERT INTO contacts (name, mobile) VALUES ('${req.body.name}', '${req.body.mobile}') `;
-
-    con.query(sql, (err, result) => {
-      if (err) throw err;
-
-      res.json({
-        message: 'Contact added successfully!',
-      });
-    });
+    await Person.create({ name: req.body.name, mobile: req.body.mobile });
+    return res.json({ message: 'Record created!' });
   });
 };
