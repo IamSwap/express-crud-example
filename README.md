@@ -3,7 +3,7 @@
 A simple crud example built with [Express.js](https://expressjs.com)
 
 ## Requirements
-Before starting make sure that you have installed & configured Node.js & MongoDB server on your system.
+Before starting make sure that you have installed & configured [Node.js](https://nodejs.org/en/) & [MongoDB](https://www.mongodb.com/) server on your system.
 - [Node.js](https://nodejs.org/en/)
 - [MongoDB](https://www.mongodb.com/)
 
