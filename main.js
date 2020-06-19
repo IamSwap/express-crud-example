@@ -1,7 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer');
-var con = require('./connection');
+var opn = require('opn');
+var connection = require('./connection');
 
 // Initialize app
 const app = express();
@@ -16,8 +17,9 @@ app.use(express.static('public'));
 require('./routes')(app);
 
 // Boot app on PORT: 3000
-con().then(async () => {
-  app.listen(3000, () =>
-    console.log('App is running at http://localhost:3000')
-  );
+connection().then(async () => {
+  app.listen(3000, () => {
+    opn('http://localhost:3000');
+    console.log('App is running at http://localhost:3000');
+  });
 });
