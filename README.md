@@ -2,6 +2,11 @@
 
 A simple crud example built with [Express.js](https://expressjs.com)
 
+## Requirements
+Before starting make sure that you have installed & configured Node.js & MongoDB server on your system.
+- [Node.js](https://nodejs.org/en/)
+- [MongoDB](https://www.mongodb.com/)
+
 ## Usage
 
 Clone the repository
@@ -16,8 +21,6 @@ Install node modules
 cd express-crud-example && npm install
 ```
 
-
-> 🔧 Configure database connection by setting `DATABASE_URL` in `.env` file.
 
 Create your `.env` file by copying `.env.example` file.
 
