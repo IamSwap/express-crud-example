@@ -16,9 +16,10 @@ Install node modules
 cd express-crud-example && npm install
 ```
 
-🔧 Configure database connection by setting `DATABASE_URL` in `.env` file.
 
-First create your `.env` file by copying `.env.example` file.
+> 🔧 Configure database connection by setting `DATABASE_URL` in `.env` file.
+
+Create your `.env` file by copying `.env.example` file.
 
 ```bash
 cp .env.example .env
