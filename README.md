@@ -16,13 +16,22 @@ Install node modules
 cd express-crud-example && npm install
 ```
 
-Set your database connection in `connection.js`
+🔧 Configure database connection by setting `DATABASE_URL` in `.env` file.
 
-```js
-const con = () => {
-  return mongoose.connect('mongodb://localhost:27017/contacts', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-};
+First create your `.env` file by copying `.env.example` file.
+
+```bash
+cp .env.example .env
+```
+
+Then set `DATABASE_URL` in `.env`.
+
+```env
+DATABASE_URL=mongodb://localhost:27017/contacts
+```
+
+Finally run the app! 🎉
+
+```bash
+npm run dev
 ```
